@@ -16,6 +16,7 @@ export default function Main() {
             {/* </div> */}
             <hr className='border-black-400' />
             <IncAnaly />
+            {/* <IncTestText /> */}
             <hr className='border-black-400' />
             <IncLandingExplanation />
             <hr className='border-black-400' />
