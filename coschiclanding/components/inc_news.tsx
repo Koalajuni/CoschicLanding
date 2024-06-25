@@ -9,29 +9,32 @@ export default function IncNews() {
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault(); // Prevent default form submission behavior
+        const data = {
+            email,
+            subject: 'interest',  // Change 'subject' to 'interest'
+            message: 'interested message '  // Change message content as needed
+        };
 
         try {
-            const response = await axiosInstance.post('/send_email', JSON.stringify({
-                email: email,
-                subject: 'Interest',
-                message: 'Contacted for more info:'
-            }), {
+            const response = await fetch('/api/proxy', {
+                method: 'POST',
                 headers: {
-                    'Content-Type': 'application/json'
-                }
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
             });
             if (response.status === 200) {
                 setSuccessMessage('Your message was sent successfully!');
-                setEmail(''); // Clear email field after successful submission
-                setErrorMessage(''); // Clear error message if any
+                setEmail('');
+                setErrorMessage('');
             } else {
                 setErrorMessage('An error occurred. Please try again.');
-                setSuccessMessage(''); // Clear success message if any
+                setSuccessMessage('');
             }
         } catch (error) {
             setErrorMessage('An error occurred. Please try again.');
-            setSuccessMessage(''); // Clear success message if any
-            console.error(error); // Log the error for debugging purposes
+            setSuccessMessage('');
+            console.error(error);
         }
     };
 
